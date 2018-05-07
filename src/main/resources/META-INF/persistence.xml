@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="identidadPU" transaction-type="JTA">
+    <jta-data-source>jndi/identidadgenero</jta-data-source>
+    <class>mx.ipn.escom.modelo.Institucion</class>
+    <class>mx.ipn.escom.modelo.RepresentanteInstitucion</class>
+    <class>mx.ipn.escom.modelo.Academico</class>
+    <class>mx.ipn.escom.modelo.Administrador</class>
+    <class>mx.ipn.escom.modelo.Cuestionario</class>
+    <class>mx.ipn.escom.modelo.Tipo</class>
+    <class>mx.ipn.escom.modelo.Alumno</class>
+    <class>mx.ipn.escom.modelo.Seccion</class>
+    <class>mx.ipn.escom.modelo.Genero</class>
+    <class>mx.ipn.escom.modelo.OpcionRespuesta</class>
+    <class>mx.ipn.escom.modelo.Puntuacion</class>
+    <class>mx.ipn.escom.modelo.Respuesta</class>
+    <class>mx.ipn.escom.modelo.Pregunta</class>
+    <class>mx.ipn.escom.modelo.Categoria</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties/>
+  </persistence-unit>
+</persistence>
