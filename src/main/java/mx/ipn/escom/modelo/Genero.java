@@ -6,11 +6,12 @@
 package mx.ipn.escom.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -37,10 +38,10 @@ public class Genero implements Serializable {
     @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgenero")
-    private Collection<Alumno> alumnoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgenero")
-    private Collection<Puntuacion> puntuacionCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgenero", fetch = FetchType.EAGER)
+    private List<Alumno> alumnoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgenero", fetch = FetchType.EAGER)
+    private List<Puntuacion> puntuacionList;
 
     public Genero() {
     }
@@ -70,20 +71,20 @@ public class Genero implements Serializable {
         this.nombre = nombre;
     }
 
-    public Collection<Alumno> getAlumnoCollection() {
-        return alumnoCollection;
+    public List<Alumno> getAlumnoList() {
+        return alumnoList;
     }
 
-    public void setAlumnoCollection(Collection<Alumno> alumnoCollection) {
-        this.alumnoCollection = alumnoCollection;
+    public void setAlumnoList(List<Alumno> alumnoList) {
+        this.alumnoList = alumnoList;
     }
 
-    public Collection<Puntuacion> getPuntuacionCollection() {
-        return puntuacionCollection;
+    public List<Puntuacion> getPuntuacionList() {
+        return puntuacionList;
     }
 
-    public void setPuntuacionCollection(Collection<Puntuacion> puntuacionCollection) {
-        this.puntuacionCollection = puntuacionCollection;
+    public void setPuntuacionList(List<Puntuacion> puntuacionList) {
+        this.puntuacionList = puntuacionList;
     }
 
     @Override

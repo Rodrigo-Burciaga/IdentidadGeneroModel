@@ -6,17 +6,20 @@
 package mx.ipn.escom.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -67,6 +70,8 @@ public class Institucion implements Serializable {
     private String estado;
     @Id
     @Basic(optional = false)
+    @GeneratedValue(generator = "InstSeq")
+    @SequenceGenerator(name = "InstSeq", sequenceName = "INSTITUCION_SEQ", allocationSize = 1)
     @Column(name = "ID")
     private Long id;
     @Basic(optional = false)
@@ -74,7 +79,7 @@ public class Institucion implements Serializable {
     private String acronimo;
     @Basic(optional = false)
     @Column(name = "TELEFONO")
-    private long telefono;
+    private Long telefono;
     @Basic(optional = false)
     @Column(name = "DIRECTOR")
     private String director;
@@ -83,15 +88,15 @@ public class Institucion implements Serializable {
     private String delegacion;
     @Basic(optional = false)
     @Column(name = "CP")
-    private int cp;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idinstitucion")
-    private Collection<Alumno> alumnoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idinstitucion")
-    private Collection<Academico> academicoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idinstitucion")
-    private Collection<RepresentanteInstitucion> representanteInstitucionCollection;
+    private Integer cp;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idinstitucion", fetch = FetchType.EAGER)
+    private List<Alumno> alumnoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idinstitucion", fetch = FetchType.EAGER)
+    private List<Academico> academicoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idinstitucion", fetch = FetchType.EAGER)
+    private List<RepresentanteInstitucion> representanteInstitucionList;
     @JoinColumn(name = "IDADMINISTRADOR", referencedColumnName = "ID")
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Administrador idadministrador;
 
     public Institucion() {
@@ -195,11 +200,11 @@ public class Institucion implements Serializable {
         this.acronimo = acronimo;
     }
 
-    public long getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(long telefono) {
+    public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
 
@@ -219,36 +224,36 @@ public class Institucion implements Serializable {
         this.delegacion = delegacion;
     }
 
-    public int getCp() {
+    public Integer getCp() {
         return cp;
     }
 
-    public void setCp(int cp) {
+    public void setCp(Integer cp) {
         this.cp = cp;
     }
 
-    public Collection<Alumno> getAlumnoCollection() {
-        return alumnoCollection;
+    public List<Alumno> getAlumnoList() {
+        return alumnoList;
     }
 
-    public void setAlumnoCollection(Collection<Alumno> alumnoCollection) {
-        this.alumnoCollection = alumnoCollection;
+    public void setAlumnoList(List<Alumno> alumnoList) {
+        this.alumnoList = alumnoList;
     }
 
-    public Collection<Academico> getAcademicoCollection() {
-        return academicoCollection;
+    public List<Academico> getAcademicoList() {
+        return academicoList;
     }
 
-    public void setAcademicoCollection(Collection<Academico> academicoCollection) {
-        this.academicoCollection = academicoCollection;
+    public void setAcademicoList(List<Academico> academicoList) {
+        this.academicoList = academicoList;
     }
 
-    public Collection<RepresentanteInstitucion> getRepresentanteInstitucionCollection() {
-        return representanteInstitucionCollection;
+    public List<RepresentanteInstitucion> getRepresentanteInstitucionList() {
+        return representanteInstitucionList;
     }
 
-    public void setRepresentanteInstitucionCollection(Collection<RepresentanteInstitucion> representanteInstitucionCollection) {
-        this.representanteInstitucionCollection = representanteInstitucionCollection;
+    public void setRepresentanteInstitucionList(List<RepresentanteInstitucion> representanteInstitucionList) {
+        this.representanteInstitucionList = representanteInstitucionList;
     }
 
     public Administrador getIdadministrador() {
@@ -283,5 +288,5 @@ public class Institucion implements Serializable {
     public String toString() {
         return "mx.ipn.escom.modelo.Institucion[ id=" + id + " ]";
     }
-    
+
 }

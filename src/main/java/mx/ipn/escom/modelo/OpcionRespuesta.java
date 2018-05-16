@@ -6,11 +6,12 @@
 package mx.ipn.escom.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -39,13 +40,13 @@ public class OpcionRespuesta implements Serializable {
     @Basic(optional = false)
     @Column(name = "OPCION")
     private String opcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idopcion")
-    private Collection<Respuesta> respuestaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idopcion", fetch = FetchType.EAGER)
+    private List<Respuesta> respuestaList;
     @JoinColumn(name = "IDPREGUNTA", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Pregunta idpregunta;
     @JoinColumn(name = "IDPUNTUACION", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Puntuacion idpuntuacion;
 
     public OpcionRespuesta() {
@@ -76,12 +77,12 @@ public class OpcionRespuesta implements Serializable {
         this.opcion = opcion;
     }
 
-    public Collection<Respuesta> getRespuestaCollection() {
-        return respuestaCollection;
+    public List<Respuesta> getRespuestaList() {
+        return respuestaList;
     }
 
-    public void setRespuestaCollection(Collection<Respuesta> respuestaCollection) {
-        this.respuestaCollection = respuestaCollection;
+    public void setRespuestaList(List<Respuesta> respuestaList) {
+        this.respuestaList = respuestaList;
     }
 
     public Pregunta getIdpregunta() {

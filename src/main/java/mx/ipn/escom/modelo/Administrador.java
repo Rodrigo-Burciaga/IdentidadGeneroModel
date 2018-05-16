@@ -6,12 +6,13 @@
 package mx.ipn.escom.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -65,7 +66,7 @@ public class Administrador implements Serializable {
     private String numeroempleado;
     @Basic(optional = false)
     @Column(name = "TELEFONO")
-    private long telefono;
+    private Long telefono;
     @Basic(optional = false)
     @Column(name = "CORREOELECTRONICO")
     private String correoelectronico;
@@ -76,10 +77,10 @@ public class Administrador implements Serializable {
     @Column(name = "FECHAFIN")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechafin;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idadministrador")
-    private Collection<RepresentanteInstitucion> representanteInstitucionCollection;
-    @OneToMany(mappedBy = "idadministrador")
-    private Collection<Institucion> institucionCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idadministrador", fetch = FetchType.EAGER)
+    private List<RepresentanteInstitucion> representanteInstitucionList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idadministrador", fetch = FetchType.EAGER)
+    private List<Institucion> institucionList;
 
     public Administrador() {
     }
@@ -156,11 +157,11 @@ public class Administrador implements Serializable {
         this.numeroempleado = numeroempleado;
     }
 
-    public long getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(long telefono) {
+    public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
 
@@ -188,20 +189,20 @@ public class Administrador implements Serializable {
         this.fechafin = fechafin;
     }
 
-    public Collection<RepresentanteInstitucion> getRepresentanteInstitucionCollection() {
-        return representanteInstitucionCollection;
+    public List<RepresentanteInstitucion> getRepresentanteInstitucionList() {
+        return representanteInstitucionList;
     }
 
-    public void setRepresentanteInstitucionCollection(Collection<RepresentanteInstitucion> representanteInstitucionCollection) {
-        this.representanteInstitucionCollection = representanteInstitucionCollection;
+    public void setRepresentanteInstitucionList(List<RepresentanteInstitucion> representanteInstitucionList) {
+        this.representanteInstitucionList = representanteInstitucionList;
     }
 
-    public Collection<Institucion> getInstitucionCollection() {
-        return institucionCollection;
+    public List<Institucion> getInstitucionList() {
+        return institucionList;
     }
 
-    public void setInstitucionCollection(Collection<Institucion> institucionCollection) {
-        this.institucionCollection = institucionCollection;
+    public void setInstitucionList(List<Institucion> institucionList) {
+        this.institucionList = institucionList;
     }
 
     @Override

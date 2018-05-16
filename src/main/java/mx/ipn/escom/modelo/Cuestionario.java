@@ -6,11 +6,12 @@
 package mx.ipn.escom.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -40,10 +41,10 @@ public class Cuestionario implements Serializable {
     @Column(name = "NOMBRE")
     private String nombre;
     @JoinColumn(name = "IDREPRESENTANTEINST", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private RepresentanteInstitucion idrepresentanteinst;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuestionario")
-    private Collection<Categoria> categoriaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuestionario", fetch = FetchType.EAGER)
+    private List<Categoria> categoriaList;
 
     public Cuestionario() {
     }
@@ -81,12 +82,12 @@ public class Cuestionario implements Serializable {
         this.idrepresentanteinst = idrepresentanteinst;
     }
 
-    public Collection<Categoria> getCategoriaCollection() {
-        return categoriaCollection;
+    public List<Categoria> getCategoriaList() {
+        return categoriaList;
     }
 
-    public void setCategoriaCollection(Collection<Categoria> categoriaCollection) {
-        this.categoriaCollection = categoriaCollection;
+    public void setCategoriaList(List<Categoria> categoriaList) {
+        this.categoriaList = categoriaList;
     }
 
     @Override

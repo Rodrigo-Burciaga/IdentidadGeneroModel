@@ -6,12 +6,13 @@
 package mx.ipn.escom.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -78,15 +79,15 @@ public class RepresentanteInstitucion implements Serializable {
     @Column(name = "FECHAFIN")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechafin;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idrepresentanteinst")
-    private Collection<Cuestionario> cuestionarioCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idrepinstitucion")
-    private Collection<Academico> academicoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idrepresentanteinst", fetch = FetchType.EAGER)
+    private List<Cuestionario> cuestionarioList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idrepinstitucion", fetch = FetchType.EAGER)
+    private List<Academico> academicoList;
     @JoinColumn(name = "IDADMINISTRADOR", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Administrador idadministrador;
     @JoinColumn(name = "IDINSTITUCION", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Institucion idinstitucion;
 
     public RepresentanteInstitucion() {
@@ -196,20 +197,20 @@ public class RepresentanteInstitucion implements Serializable {
         this.fechafin = fechafin;
     }
 
-    public Collection<Cuestionario> getCuestionarioCollection() {
-        return cuestionarioCollection;
+    public List<Cuestionario> getCuestionarioList() {
+        return cuestionarioList;
     }
 
-    public void setCuestionarioCollection(Collection<Cuestionario> cuestionarioCollection) {
-        this.cuestionarioCollection = cuestionarioCollection;
+    public void setCuestionarioList(List<Cuestionario> cuestionarioList) {
+        this.cuestionarioList = cuestionarioList;
     }
 
-    public Collection<Academico> getAcademicoCollection() {
-        return academicoCollection;
+    public List<Academico> getAcademicoList() {
+        return academicoList;
     }
 
-    public void setAcademicoCollection(Collection<Academico> academicoCollection) {
-        this.academicoCollection = academicoCollection;
+    public void setAcademicoList(List<Academico> academicoList) {
+        this.academicoList = academicoList;
     }
 
     public Administrador getIdadministrador() {

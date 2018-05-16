@@ -6,11 +6,12 @@
 package mx.ipn.escom.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -37,8 +38,8 @@ public class Tipo implements Serializable {
     @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtipo")
-    private Collection<Pregunta> preguntaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtipo", fetch = FetchType.EAGER)
+    private List<Pregunta> preguntaList;
 
     public Tipo() {
     }
@@ -68,12 +69,12 @@ public class Tipo implements Serializable {
         this.nombre = nombre;
     }
 
-    public Collection<Pregunta> getPreguntaCollection() {
-        return preguntaCollection;
+    public List<Pregunta> getPreguntaList() {
+        return preguntaList;
     }
 
-    public void setPreguntaCollection(Collection<Pregunta> preguntaCollection) {
-        this.preguntaCollection = preguntaCollection;
+    public void setPreguntaList(List<Pregunta> preguntaList) {
+        this.preguntaList = preguntaList;
     }
 
     @Override

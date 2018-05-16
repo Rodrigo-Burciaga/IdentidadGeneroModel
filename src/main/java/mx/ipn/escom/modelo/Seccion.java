@@ -6,11 +6,12 @@
 package mx.ipn.escom.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -39,10 +40,10 @@ public class Seccion implements Serializable {
     @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idseccion")
-    private Collection<Pregunta> preguntaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idseccion", fetch = FetchType.EAGER)
+    private List<Pregunta> preguntaList;
     @JoinColumn(name = "IDCATEGORIA", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Categoria idcategoria;
 
     public Seccion() {
@@ -73,12 +74,12 @@ public class Seccion implements Serializable {
         this.nombre = nombre;
     }
 
-    public Collection<Pregunta> getPreguntaCollection() {
-        return preguntaCollection;
+    public List<Pregunta> getPreguntaList() {
+        return preguntaList;
     }
 
-    public void setPreguntaCollection(Collection<Pregunta> preguntaCollection) {
-        this.preguntaCollection = preguntaCollection;
+    public void setPreguntaList(List<Pregunta> preguntaList) {
+        this.preguntaList = preguntaList;
     }
 
     public Categoria getIdcategoria() {

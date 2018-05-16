@@ -6,11 +6,12 @@
 package mx.ipn.escom.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -36,13 +37,13 @@ public class Alumno implements Serializable {
     @Column(name = "ID")
     private Long id;
     @JoinColumn(name = "IDGENERO", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Genero idgenero;
     @JoinColumn(name = "IDINSTITUCION", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Institucion idinstitucion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
-    private Collection<Respuesta> respuestaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno", fetch = FetchType.EAGER)
+    private List<Respuesta> respuestaList;
 
     public Alumno() {
     }
@@ -75,12 +76,12 @@ public class Alumno implements Serializable {
         this.idinstitucion = idinstitucion;
     }
 
-    public Collection<Respuesta> getRespuestaCollection() {
-        return respuestaCollection;
+    public List<Respuesta> getRespuestaList() {
+        return respuestaList;
     }
 
-    public void setRespuestaCollection(Collection<Respuesta> respuestaCollection) {
-        this.respuestaCollection = respuestaCollection;
+    public void setRespuestaList(List<Respuesta> respuestaList) {
+        this.respuestaList = respuestaList;
     }
 
     @Override
