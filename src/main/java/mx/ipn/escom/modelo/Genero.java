@@ -39,8 +39,6 @@ public class Genero implements Serializable {
     @Column(name = "NOMBRE")
     private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgenero", fetch = FetchType.EAGER)
-    private List<Alumno> alumnoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgenero", fetch = FetchType.EAGER)
     private List<Puntuacion> puntuacionList;
 
     public Genero() {
@@ -69,14 +67,6 @@ public class Genero implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public List<Alumno> getAlumnoList() {
-        return alumnoList;
-    }
-
-    public void setAlumnoList(List<Alumno> alumnoList) {
-        this.alumnoList = alumnoList;
     }
 
     public List<Puntuacion> getPuntuacionList() {

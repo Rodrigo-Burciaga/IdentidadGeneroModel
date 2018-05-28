@@ -46,6 +46,13 @@ import javax.persistence.Table;
     , @NamedQuery(name = "Institucion.findByCp", query = "SELECT i FROM Institucion i WHERE i.cp = :cp")})
 public class Institucion implements Serializable {
 
+    @Basic(optional = false)
+    @Column(name = "TELEFONO")
+    private Long telefono;
+    @Basic(optional = false)
+    @Column(name = "CP")
+    private Integer cp;
+
     private static final long serialVersionUID = 1L;
     @Column(name = "IMAGEN")
     private String imagen;
@@ -78,17 +85,11 @@ public class Institucion implements Serializable {
     @Column(name = "ACRONIMO")
     private String acronimo;
     @Basic(optional = false)
-    @Column(name = "TELEFONO")
-    private Long telefono;
-    @Basic(optional = false)
     @Column(name = "DIRECTOR")
     private String director;
     @Basic(optional = false)
     @Column(name = "DELEGACION")
     private String delegacion;
-    @Basic(optional = false)
-    @Column(name = "CP")
-    private Integer cp;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idinstitucion", fetch = FetchType.EAGER)
     private List<Alumno> alumnoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idinstitucion", fetch = FetchType.EAGER)
@@ -200,13 +201,6 @@ public class Institucion implements Serializable {
         this.acronimo = acronimo;
     }
 
-    public Long getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(Long telefono) {
-        this.telefono = telefono;
-    }
 
     public String getDirector() {
         return director;
@@ -224,13 +218,6 @@ public class Institucion implements Serializable {
         this.delegacion = delegacion;
     }
 
-    public Integer getCp() {
-        return cp;
-    }
-
-    public void setCp(Integer cp) {
-        this.cp = cp;
-    }
 
     public List<Alumno> getAlumnoList() {
         return alumnoList;
@@ -287,6 +274,22 @@ public class Institucion implements Serializable {
     @Override
     public String toString() {
         return "mx.ipn.escom.modelo.Institucion[ id=" + id + " ]";
+    }
+
+    public Long getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(Long telefono) {
+        this.telefono = telefono;
+    }
+
+    public Integer getCp() {
+        return cp;
+    }
+
+    public void setCp(Integer cp) {
+        this.cp = cp;
     }
 
 }

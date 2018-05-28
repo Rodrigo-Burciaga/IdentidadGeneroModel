@@ -6,18 +6,17 @@
 package mx.ipn.escom.modelo;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -36,15 +35,18 @@ public class Puntuacion implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
+    @GeneratedValue(generator = "PuntuacionSeq")
+    @SequenceGenerator(name = "PuntuacionSeq", sequenceName = "PUNTUACION_SEQ", allocationSize = 1)
     private Long id;
     @Basic(optional = false)
     @Column(name = "PUNTUACION")
-    private long puntuacion;
+    private Integer puntuacion;
     @JoinColumn(name = "IDGENERO", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Genero idgenero;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idpuntuacion", fetch = FetchType.EAGER)
-    private List<OpcionRespuesta> opcionRespuestaList;
+    @JoinColumn(name = "IDOPCIONRESPUESTA", referencedColumnName = "ID")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private OpcionRespuesta idopcionrespuesta;
 
     public Puntuacion() {
     }
@@ -53,7 +55,7 @@ public class Puntuacion implements Serializable {
         this.id = id;
     }
 
-    public Puntuacion(Long id, long puntuacion) {
+    public Puntuacion(Long id, Integer puntuacion) {
         this.id = id;
         this.puntuacion = puntuacion;
     }
@@ -66,11 +68,11 @@ public class Puntuacion implements Serializable {
         this.id = id;
     }
 
-    public long getPuntuacion() {
+    public Integer getPuntuacion() {
         return puntuacion;
     }
 
-    public void setPuntuacion(long puntuacion) {
+    public void setPuntuacion(Integer puntuacion) {
         this.puntuacion = puntuacion;
     }
 
@@ -82,12 +84,12 @@ public class Puntuacion implements Serializable {
         this.idgenero = idgenero;
     }
 
-    public List<OpcionRespuesta> getOpcionRespuestaList() {
-        return opcionRespuestaList;
+    public OpcionRespuesta getIdopcionrespuesta() {
+        return idopcionrespuesta;
     }
 
-    public void setOpcionRespuestaList(List<OpcionRespuesta> opcionRespuestaList) {
-        this.opcionRespuestaList = opcionRespuestaList;
+    public void setIdopcionrespuesta(OpcionRespuesta idopcionrespuesta) {
+        this.idopcionrespuesta = idopcionrespuesta;
     }
 
     @Override

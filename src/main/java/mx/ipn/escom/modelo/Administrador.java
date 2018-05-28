@@ -42,6 +42,10 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "Administrador.findByFechafin", query = "SELECT a FROM Administrador a WHERE a.fechafin = :fechafin")})
 public class Administrador implements Serializable {
 
+    @Basic(optional = false)
+    @Column(name = "TELEFONO")
+    private Long telefono;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -64,9 +68,6 @@ public class Administrador implements Serializable {
     @Basic(optional = false)
     @Column(name = "NUMEROEMPLEADO")
     private String numeroempleado;
-    @Basic(optional = false)
-    @Column(name = "TELEFONO")
-    private Long telefono;
     @Basic(optional = false)
     @Column(name = "CORREOELECTRONICO")
     private String correoelectronico;
@@ -157,13 +158,6 @@ public class Administrador implements Serializable {
         this.numeroempleado = numeroempleado;
     }
 
-    public Long getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(Long telefono) {
-        this.telefono = telefono;
-    }
 
     public String getCorreoelectronico() {
         return correoelectronico;
@@ -228,6 +222,14 @@ public class Administrador implements Serializable {
     @Override
     public String toString() {
         return "mx.ipn.escom.modelo.Administrador[ id=" + id + " ]";
+    }
+
+    public Long getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(Long telefono) {
+        this.telefono = telefono;
     }
     
 }

@@ -12,12 +12,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -36,18 +38,17 @@ public class OpcionRespuesta implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
+    @GeneratedValue(generator = "OpcionRespuestaSeq")
+    @SequenceGenerator(name = "OpcionRespuestaSeq", sequenceName = "OPCION_RESPUESTA_SEQ", allocationSize = 1)
     private Long id;
     @Basic(optional = false)
     @Column(name = "OPCION")
     private String opcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idopcion", fetch = FetchType.EAGER)
-    private List<Respuesta> respuestaList;
     @JoinColumn(name = "IDPREGUNTA", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Pregunta idpregunta;
-    @JoinColumn(name = "IDPUNTUACION", referencedColumnName = "ID")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Puntuacion idpuntuacion;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idopcionrespuesta", fetch = FetchType.EAGER)
+    private List<Puntuacion> puntuacionList;
 
     public OpcionRespuesta() {
     }
@@ -77,14 +78,6 @@ public class OpcionRespuesta implements Serializable {
         this.opcion = opcion;
     }
 
-    public List<Respuesta> getRespuestaList() {
-        return respuestaList;
-    }
-
-    public void setRespuestaList(List<Respuesta> respuestaList) {
-        this.respuestaList = respuestaList;
-    }
-
     public Pregunta getIdpregunta() {
         return idpregunta;
     }
@@ -93,12 +86,12 @@ public class OpcionRespuesta implements Serializable {
         this.idpregunta = idpregunta;
     }
 
-    public Puntuacion getIdpuntuacion() {
-        return idpuntuacion;
+    public List<Puntuacion> getPuntuacionList() {
+        return puntuacionList;
     }
 
-    public void setIdpuntuacion(Puntuacion idpuntuacion) {
-        this.idpuntuacion = idpuntuacion;
+    public void setPuntuacionList(List<Puntuacion> puntuacionList) {
+        this.puntuacionList = puntuacionList;
     }
 
     @Override
@@ -125,5 +118,5 @@ public class OpcionRespuesta implements Serializable {
     public String toString() {
         return "mx.ipn.escom.modelo.OpcionRespuesta[ id=" + id + " ]";
     }
-    
+
 }
